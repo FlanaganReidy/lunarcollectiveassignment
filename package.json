@@ -1,0 +1,29 @@
+{
+  "name": "lunarcollectiveassigment",
+  "version": "1.0.0",
+  "description": "This is an SPA for my Lunar Collective interview.",
+  "main": "app.js",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongodb": "^3.0.0-rc0",
+    "mongoose": "^4.10.8",
+    "mustache-express": "^1.2.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FlanaganReidy/lunarcollectiveassignment.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FlanaganReidy/lunarcollectiveassignment/issues"
+  },
+  "homepage": "https://github.com/FlanaganReidy/lunarcollectiveassignment#readme"
+}
