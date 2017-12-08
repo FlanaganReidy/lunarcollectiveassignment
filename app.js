@@ -4,7 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://localhost:27017/textblockdb');
+mongoose.connect('mongodb://localhost/textblockdb');
 const MongoClient = require('mongodb').MongoClient,
   assert = require('assert');
 const ObjectId = require('mongodb').ObjectID;
@@ -26,7 +26,16 @@ res.render('index');
 })
 app.post('/', function(req,res){
 
+
 })
 app.listen(3000, function(){
   console.log('Successfully started Express Application');
 })
+
+process.on('SIGINT', function() {
+  console.log("\nshutting down");
+  mongoose.connection.close(function() {
+    console.log('Mongoose default connection disconnected on app termination');
+    process.exit(0);
+  });
+});
