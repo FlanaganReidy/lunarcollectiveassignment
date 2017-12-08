@@ -6,17 +6,22 @@
     <link rel="stylesheet" href="public/style.css">
   </head>
   <body>
+    <div class="container">
     <header>
       <h1>Give me some Text!</h1>
     </header>
-    <form class="" action="index.html" method="post">
+    <form class="textForm" action="/" method="post">
       <input type="text" name="title" value="" placeholder="Title">
-      <textarea name="name" rows="8" cols="80"></textarea>
+      <textarea name="textBody" rows="8" cols="80"></textarea>
       <button type="submit" name="button">Save Text</button>
     </form>
     <div class="textblock">
-
+      {{#Blocks}}
+      <h1>{{title}}</h1>
+      <p>{{textBody}}</p>
+      {{/Blocks}}
     </div>
+  </div>
 
   </body>
 </html>
