@@ -15,12 +15,12 @@
       <textarea name="textBody" rows="8" cols="80"></textarea>
       <button type="submit" name="button">Save Text</button>
     </form>
+    {{#Blocks}}
     <div class="textblock">
-      {{#Blocks}}
       <h1>{{title}}</h1>
       <p>{{textBody}}</p>
-      {{/Blocks}}
     </div>
+    {{/Blocks}}
   </div>
 
   </body>

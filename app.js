@@ -3,7 +3,7 @@ const mustacheExpress = require('mustache-express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const TextBlock = requrie('./models/textblock.js');
+const TextBlock = require('./models/textblock.js');
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://localhost/textblockdb');
 const MongoClient = require('mongodb').MongoClient,
@@ -24,28 +24,38 @@ app.set('views', './views');
 app.set('view engine', 'mustache');
 
 app.get('/', function(req,res){
-res.render('index');
+  TextBlock.find()
+  .then(function(Blocks){
+    //let's see all our text blocks
+    console.log("We're rerendering");
+    res.render('index',{Blocks:Blocks})
+  })
 })
+
+
 app.post('/', function(req,res){
+//These target the fields in the form
 const title = req.body.title;
-const textBody = req.body.testBlock;
+const textBody = req.body.textBody;
 const textBlock = new TextBlock({
   title:title,
   textBody:textBody
 });
+//save our new text block
 textBlock.save()
 .then(function(){
-  return textBlock.find();
+  //once it's saved, find all textblocks
+  console.log("We're refinding");
+  return TextBlock.find();
 }).then(function(Blocks){
-  res.render('index.mustache',{Blocks:Blocks})
-}) .catch(function(error){
+  //let's see all our text blocks
+  console.log("We're rerendering");
+  res.render('index',{Blocks:Blocks})
+}).catch(function(error){
       console.log('error' + JSON.stringify(error));
       res.redirect('/')
     })
-
-
 })
-
 
 app.listen(3000, function(){
   console.log('Successfully started Express Application');
