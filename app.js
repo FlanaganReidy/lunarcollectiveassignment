@@ -1,9 +1,14 @@
 const express = require('express');
 const mustacheExpress = require('mustache-express');
+
 const path = require('path');
+//this reads our form
 const bodyParser = require('body-parser');
+//this lets us make mongo conform
 const mongoose = require('mongoose');
+//our mongoos schema
 const TextBlock = require('./models/textblock.js');
+//our promise handler
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://localhost/textblockdb');
 const MongoClient = require('mongodb').MongoClient,
