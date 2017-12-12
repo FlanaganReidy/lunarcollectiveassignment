@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Text Saver</title>
     <link rel="stylesheet" href="public/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
   </head>
   <body>
     <div class="container">
@@ -11,14 +12,14 @@
     <header>
       <h1>Give me some Text!</h1>
     </header>
-    {{error}}
+    <p id="errorMsg">{{error}}</p>
     <form class="textForm" action="/" method="post">
       <input type="text" name="title" value="" placeholder="Title">
-      <textarea name="textBody" rows="8" cols="80">Write Here!</textarea>
+      <textarea name="textBody" rows="8" cols="80" placeholder="Write here!"></textarea>
       <button type="submit" name="button">Save Text</button>
     </form>
 
-    <div id="blockspace">
+    <div id="blockSpace">
 
     {{#Blocks}}
     <div class="textBlock">

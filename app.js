@@ -83,6 +83,7 @@ textBlock.save()
   res.render('index',{Blocks:Blocks})
 }).catch(function(error){
       console.log('error' + JSON.stringify(error));
+      req.session.error = error.errors.title.message;
       res.redirect('/')
     })
   }

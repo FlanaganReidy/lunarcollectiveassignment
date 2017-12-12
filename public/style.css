@@ -1,23 +1,76 @@
+body{
+  background-color: #A18DB2;
+}
 
 .container{
   display:flex;
   flex-direction: column;
   align-items: center;
+
 }
 .textForm{
-  width: 30%;
+  width: 48%;
   display: flex;
   flex-direction: column;
+  background-color: #9DFFDB;
+  padding: 2% 2%;
+  border-radius: 25px;
+  margin-bottom: 1%;
+  box-shadow: 4px 4px #6D4EA1;
 }
-#blockspace{
+textarea{
+  font-size: 16pt;
+  border-radius: 5px;
+  border: none;
+  margin: 1%;
+  background-color: #FFFBEB;
+}
+input{
+  font-size: 16pt;
+  border-radius: 5px;
+  border: none;
+  background-color: #FFFBEB;
+}
+#blockSpace{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  background-color: #9DFFDB;
+  border-radius: 25px;
+  box-shadow: 4px 4px #6D4EA1;
 }
 .textBlock{
+  width: 80%;
   padding: 5% 5%;
   margin: 5% 5%;
-  border-style: solid;
+  border-style: none;
   border-color: black;
+  background-color: #FFFFCC;
+  border-radius: 25px;
+
+
+}
+#errorMsg{
+  font-weight: bold;
+  color: #A11628;
+}
+button{
+  border: none;
+  font-size: 18pt;
+  background-color: #FFFFCC;
+  margin-bottom: 2%;
+
+}
+button:hover{
+  background-color: #A18DB2;
+  color: white;
+}
+h1, p, button{
+  font-family: 'Roboto Slab', serif;
+  color: #373838;
+
+}
+header>h1{
+  font-size: 2.2em;
 
 }
