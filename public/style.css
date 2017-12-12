@@ -72,5 +72,7 @@ h1, p, button{
 }
 header>h1{
   font-size: 2.2em;
+  color: #FFFFCC;
+  font-weight: lighter;
 
 }
