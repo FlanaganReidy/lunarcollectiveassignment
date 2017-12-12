@@ -4,6 +4,7 @@ const mustacheExpress = require('mustache-express');
 //middleware to validate our user input
 const expressValidator = require('express-validator');
 const path = require('path');
+const session = require('express-session');
 //this reads our form
 const bodyParser = require('body-parser');
 //this is how we check if the conditions are met
@@ -19,9 +20,7 @@ const MongoClient = require('mongodb').MongoClient,
   assert = require('assert');
 const ObjectId = require('mongodb').ObjectID;
 
-
 const app = express();
-
 
 app.engine('mustache', mustacheExpress());
 app.use(bodyParser.json());
@@ -33,21 +32,35 @@ app.use('/public', express.static(path.join(__dirname, '/public')));
 app.set('views', './views');
 app.set('view engine', 'mustache');
 
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}))
+
 app.get('/', function(req,res,next){
   TextBlock.find()
   .then(function(Blocks){
     //let's see all our text blocks
-    console.log("We're rerendering");
-    res.render('index',{Blocks:Blocks})
+    console.log("We're rendering");
+    if (req.session.error) {
+      res.render('index',{Blocks:Blocks, error:req.session.error})
+    }
+    else{
+      delete req.session.error;
+      res.render('index',{Blocks:Blocks})
+    }
+
   })
 })
 
-app.post('/',[check('textBody').isLength({min:5, max:500})], function(req,res,next){
+app.post('/',[check('textBody').isLength({min:5, max:500}).withMessage('Must be greater than 5 characters and less than 500')], function(req,res,next){
 
 const errors = validationResult(req);
+//if the middleware says there's an error
 if (!errors.isEmpty()) {
-  //logs our error
   //sends us back home
+  req.session.error = errors.mapped().textBody.msg;
   res.redirect('/')
 }
 else{
