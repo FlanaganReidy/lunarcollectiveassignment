@@ -1,10 +1,14 @@
 const express = require('express');
+//views package
 const mustacheExpress = require('mustache-express');
-
+//middleware to validate our user input
+const expressValidator = require('express-validator');
 const path = require('path');
 //this reads our form
 const bodyParser = require('body-parser');
-//this lets us make mongo conform
+//this is how we check if the conditions are met
+const { check, validationResult } = require('express-validator/check');
+//this lets us make mongo an ORM
 const mongoose = require('mongoose');
 //our mongoos schema
 const TextBlock = require('./models/textblock.js');
@@ -18,6 +22,7 @@ const ObjectId = require('mongodb').ObjectID;
 
 const app = express();
 
+
 app.engine('mustache', mustacheExpress());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -28,7 +33,7 @@ app.use('/public', express.static(path.join(__dirname, '/public')));
 app.set('views', './views');
 app.set('view engine', 'mustache');
 
-app.get('/', function(req,res){
+app.get('/', function(req,res,next){
   TextBlock.find()
   .then(function(Blocks){
     //let's see all our text blocks
@@ -37,8 +42,15 @@ app.get('/', function(req,res){
   })
 })
 
+app.post('/',[check('textBody').isLength({min:5, max:500})], function(req,res,next){
 
-app.post('/', function(req,res){
+const errors = validationResult(req);
+if (!errors.isEmpty()) {
+  //logs our error
+  //sends us back home
+  res.redirect('/')
+}
+else{
 //These target the fields in the form
 const title = req.body.title;
 const textBody = req.body.textBody;
@@ -60,12 +72,14 @@ textBlock.save()
       console.log('error' + JSON.stringify(error));
       res.redirect('/')
     })
+  }
 })
+
 
 app.listen(3000, function(){
   console.log('Successfully started Express Application');
 })
-
+//breaks connection with mongodb
 process.on('SIGINT', function() {
   console.log("\nshutting down");
   mongoose.connection.close(function() {
