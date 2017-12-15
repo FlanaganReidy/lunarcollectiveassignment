@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 const { check, validationResult } = require('express-validator/check');
 //this lets us make mongo an ORM
 const mongoose = require('mongoose');
-//our mongoos schema
+//our mongoose schema
 const TextBlock = require('./models/textblock.js');
 //our promise handler
 mongoose.Promise = require('bluebird');

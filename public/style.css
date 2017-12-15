@@ -1,5 +1,5 @@
 body{
-  background-color: #A18DB2;
+  background-color: #7B66A1;
 }
 
 .container{
@@ -31,7 +31,7 @@ input{
   border: none;
   background-color: #FFFBEB;
 }
-#blockSpace{
+.blockSpace{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -50,7 +50,7 @@ input{
 
 
 }
-#errorMsg{
+.errorMsg{
   font-weight: bold;
   color: #A11628;
 }
@@ -62,7 +62,7 @@ button{
 
 }
 button:hover{
-  background-color: #A18DB2;
+  background-color: #7B66A1;
   color: white;
 }
 h1, p, button{
@@ -75,4 +75,17 @@ header>h1{
   color: #FFFFCC;
   font-weight: lighter;
 
+}
+[role="tooltip"]{
+  display: none;
+}
+
+
+input:focus + [role="tooltip"] {
+	display: inline-block;
+	top: 100%;
+}
+textarea:focus + [role="tooltip"]{
+  display: inline-block;
+	top: 100%;
 }
